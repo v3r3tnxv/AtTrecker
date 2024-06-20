@@ -1,0 +1,30 @@
+.global-header {
+  width: 100%;
+  padding: 20px;
+  @include flex(row, flex-start, center, 20px);
+
+  .global-header__brand {
+    height: 48px;
+
+    .global-header__brand-img {
+      height: 48px;
+    }
+  }
+
+  .global-header__nav {
+    width: 100%;
+    @include flex(row, space-between, center, 20px);
+
+    .global-header__nav-list {
+      @include flex(row, flex-start, center, 20px);
+      .global-header__nav-item {
+      }
+    }
+
+    .global-header__account-list {
+      @include flex(row, flex-end, center, 20px);
+      .global-header__account-item {
+      }
+    }
+  }
+}
