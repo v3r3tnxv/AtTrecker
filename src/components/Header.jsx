@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, Navigate } from "react-router-dom";
 import brand from "../images/ssu-logotype.png";
+import Button from "../components/Button";
 
 function Header() {
   return (
@@ -18,11 +19,7 @@ function Header() {
           </li>
 
           <li className='global-header__nav-item'>
-            <Link to='/services'>Дисциплины</Link>
-          </li>
-
-          <li className='global-header__nav-item'>
-            <Link to='/contact'>Календарь</Link>
+            <Link to='/subjects'>Дисциплины</Link>
           </li>
 
           <li className='global-header__nav-item'>
@@ -32,11 +29,11 @@ function Header() {
 
         <ul className='global-header__account-list'>
           <li className='global-header__account-item'>
-            <Link to='/contact'>Логин пользователя</Link>
+            <span>{""}</span> {/* Отображение имени пользователя */}
           </li>
 
           <li className='global-header__account-item'>
-            <Link to='/login'>Выйти</Link>
+            <Button onClick={""}>Выйти</Button>
           </li>
         </ul>
       </nav>

@@ -1,99 +1,128 @@
-CREATE DATABASE university;
-USE university;
+CREATE DATABASE IF NOT EXISTS attrecker;
+USE attrecker;
 
-CREATE TABLE Specialties (
-    ID_specialty INT PRIMARY KEY AUTO_INCREMENT,
-    Specialty_name VARCHAR(255)
+CREATE TABLE IF NOT EXISTS Users (
+    id INT AUTO_INCREMENT NOT NULL,
+    login VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    role VARCHAR(20) NOT NULL,
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE Groups (
-    ID_group INT PRIMARY KEY AUTO_INCREMENT,
-    Group_number INT,
-    ID_specialty INT,
-    FOREIGN KEY (ID_specialty) REFERENCES Specialties(ID_specialty)
+CREATE TABLE IF NOT EXISTS WeekTypes (
+    id INT AUTO_INCREMENT NOT NULL,
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE Users (
-    ID_user INT PRIMARY KEY AUTO_INCREMENT,
-    Login VARCHAR(50),
-    Password VARCHAR(50),
-    Role VARCHAR(20)
+CREATE TABLE IF NOT EXISTS WeekDays (
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(20) NOT NULL,
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE Teachers (
-    ID_teacher INT PRIMARY KEY AUTO_INCREMENT,
-    Surname VARCHAR(50),
-    Name VARCHAR(50),
-    Patronymic VARCHAR(50),
-    ID_user INT,
-    FOREIGN KEY (ID_user) REFERENCES Users(ID_user)
+CREATE TABLE IF NOT EXISTS LessonTypes (
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE Students (
-    ID_student INT PRIMARY KEY AUTO_INCREMENT,
-    Surname VARCHAR(50),
-    Name VARCHAR(50),
-    Patronymic VARCHAR(50)
+CREATE TABLE IF NOT EXISTS Status (
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE Students_in_groups (
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    ID_group INT,
-    ID_student INT,
-    FOREIGN KEY (ID_group) REFERENCES Groups(ID_group),
-    FOREIGN KEY (ID_student) REFERENCES Students(ID_student)
+CREATE TABLE IF NOT EXISTS Specialties (
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE Disciplines (
-    ID_discipline INT PRIMARY KEY AUTO_INCREMENT,
-    Discipline_name VARCHAR(255)
+CREATE TABLE IF NOT EXISTS Subjects (
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE Lesson_types (
-    ID_lesson_type INT PRIMARY KEY AUTO_INCREMENT,
-    Lesson_type_name VARCHAR(50)
+CREATE TABLE IF NOT EXISTS Groups (
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    specialty INT NOT NULL,
+    user INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (specialty) REFERENCES Specialties(id)
+    FOREIGN KEY (user) REFERENCES Users(id)
 );
 
-CREATE TABLE Semesters (
-    ID_semester INT PRIMARY KEY AUTO_INCREMENT
+CREATE TABLE IF NOT EXISTS SubGroups (
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    group INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (group) REFERENCES Groups(id)
 );
 
-CREATE TABLE Week_days (
-    ID_week_day INT PRIMARY KEY AUTO_INCREMENT,
-    Week_day_name VARCHAR(20)
+CREATE TABLE IF NOT EXISTS Teachers (
+    id INT AUTO_INCREMENT NOT NULL,
+    surname VARCHAR(50) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    patronymic VARCHAR(50) NOT NULL,
+    user INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user) REFERENCES Users(id)
 );
 
-CREATE TABLE Lessons (
-    ID_lesson INT PRIMARY KEY AUTO_INCREMENT,
-    ID_group INT,
-    ID_teacher INT,
-    ID_discipline INT,
-    Lesson_number INT,
-    ID_lesson_type INT,
-    ID_week_day INT,
-    ID_semester INT,
-    FOREIGN KEY (ID_group) REFERENCES Groups(ID_group),
-    FOREIGN KEY (ID_teacher) REFERENCES Teachers(ID_teacher),
-    FOREIGN KEY (ID_discipline) REFERENCES Disciplines(ID_discipline),
-    FOREIGN KEY (ID_lesson_type) REFERENCES Lesson_types(ID_lesson_type),
-    FOREIGN KEY (ID_week_day) REFERENCES Week_days(ID_week_day),
-    FOREIGN KEY (ID_semester) REFERENCES Semesters(ID_semester)
+CREATE TABLE IF NOT EXISTS Students (
+    id INT AUTO_INCREMENT NOT NULL,
+    surname VARCHAR(50) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    patronymic VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE Lesson_visits (
-    ID_visit INT PRIMARY KEY AUTO_INCREMENT,
-    ID_lesson INT,
-    ID_student INT,
-    Visit_status VARCHAR(20),
-    FOREIGN KEY (ID_lesson) REFERENCES Lessons(ID_lesson),
-    FOREIGN KEY (ID_student) REFERENCES Students(ID_student)
+CREATE TABLE IF NOT EXISTS StudentsInGroups (
+    id INT AUTO_INCREMENT NOT NULL,
+    group INT NOT NULL,
+    student INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (group) REFERENCES Groups(id),
+    FOREIGN KEY (student) REFERENCES Students(id)
 );
 
-CREATE TABLE Conducted_lessons (
-    ID_conducted_lesson INT PRIMARY KEY AUTO_INCREMENT,
-    ID_lesson INT,
-    Lesson_topic VARCHAR(255),
-    Lesson_date DATE,
-    Lesson_description TEXT,
-    FOREIGN KEY (ID_lesson) REFERENCES Lessons(ID_lesson)
+CREATE TABLE IF NOT EXISTS Lessons (
+    id INT AUTO_INCREMENT NOT NULL,
+    group INT NOT NULL,
+    teacher INT NOT NULL,
+    subject INT NOT NULL,
+    number INT NOT NULL,
+    type INT NOT NULL,
+    day INT NOT NULL,
+    semester INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (group) REFERENCES Groups(id),
+    FOREIGN KEY (teacher) REFERENCES Teachers(id),
+    FOREIGN KEY (subject) REFERENCES Subjects(id),
+    FOREIGN KEY (type) REFERENCES LessonTypes(id),
+    FOREIGN KEY (day) REFERENCES WeekDays(id),
+    FOREIGN KEY (semester) REFERENCES Semesters(id)
+);
+
+CREATE TABLE IF NOT EXISTS LessonVisits (
+    id INT AUTO_INCREMENT NOT NULL,
+    lesson INT NOT NULL,
+    student INT NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (lesson) REFERENCES Lessons(id),
+    FOREIGN KEY (student) REFERENCES Students(id)
+);
+
+CREATE TABLE IF NOT EXISTS ConductedLessons (
+    id INT AUTO_INCREMENT NOT NULL,
+    lesson INT NOT NULL,
+    topic VARCHAR(255) NOT NULL,
+    date DATE NOT NULL,
+    description TEXT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (lesson) REFERENCES Lessons(id)
 );
