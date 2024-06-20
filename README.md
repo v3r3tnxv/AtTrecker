@@ -13,7 +13,6 @@ git clone https://github.com/v3r3tnxv/AtTrecker.git
 ### Установка зависимостей
 ```
 npm install
-npm install express
 ```
 ### Запуск проекта
 ```
