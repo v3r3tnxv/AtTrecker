@@ -2,7 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import api from "../../api";
-import EntityTable from "../../components/EntityTable";
+import TableSearch from "../../components/TableSearch";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
 
 const StatusesManagement = () => {
   const [statuses, setStatuses] = useState([]);
@@ -29,7 +31,7 @@ const StatusesManagement = () => {
   return (
     <main className="container">
       <h1>Статусы</h1>
-      <EntityTable data={statuses} columns={columns} />
+      <TableSearch data={statuses} columns={columns} />
     </main>
   );
 };

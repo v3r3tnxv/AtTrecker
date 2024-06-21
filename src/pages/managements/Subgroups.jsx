@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import api from "../../api";
-import EntityTable from "../../components/EntityTable";
+import TableSearch from "../../components/TableSearch";
 
 const SubGroupsManagement = () => {
   const [subgroups, setSubGroups] = useState([]);
@@ -22,14 +22,14 @@ const SubGroupsManagement = () => {
 
   const columns = [
     { header: "Идентификатор", field: "subgroup_id" },
-    { header: "Название", field: "subgroup_name" },
-    // Добавьте другие поля, если необходимо
+    { header: "Название подгруппы", field: "subgroup_name" },
+    { header: "Название группы", field: "group_name" },
   ];
 
   return (
     <main className="container">
       <h1>Подгруппы</h1>
-      <EntityTable data={subgroups} columns={columns} />
+      <TableSearch data={subgroups} columns={columns} />
     </main>
   );
 };

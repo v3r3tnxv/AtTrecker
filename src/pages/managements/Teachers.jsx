@@ -2,7 +2,9 @@
 
   import React, { useEffect, useState } from "react";
   import api from "../../api";
-  import EntityTable from "../../components/EntityTable";
+  import TableSearch from "../../components/TableSearch";
+  import Input from "../../components/Input";
+  import Button from "../../components/Button";
 
   const TeachersManagement = () => {
     const [teachers, setTeachers] = useState([]);
@@ -31,7 +33,7 @@
     return (
       <main className="container">
         <h1>Преподаватели</h1>
-        <EntityTable data={teachers} columns={columns} />
+        <TableSearch data={teachers} columns={columns} />
       </main>
     );
   };

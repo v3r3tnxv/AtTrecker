@@ -20,10 +20,6 @@ function Header() {
             <Link to="/home">Главная</Link>
           </li>
 
-          <li className="global-header__nav-item">
-            <Link to="/subjects">Дисциплины</Link>
-          </li>
-
           {/* Пункт "Управление" с выпадающим списком */}
           <li className="global-header__nav-item dropdown">
             <span className="dropdown-toggle">Управление</span>

@@ -1,10 +1,10 @@
 // client/src/managents/Students.jsx
 
-// client/src/managents/Students.jsx
-
 import React, { useEffect, useState } from "react";
 import api from "../../api";
-import EntityTable from "../../components/EntityTable";
+import TableSearch from "../../components/TableSearch";
+import Input from "../../components/Input"
+import Button from "../../components/Button";
 
 const StudentsManagement = () => {
   const [students, setStudents] = useState([]);
@@ -33,7 +33,7 @@ const StudentsManagement = () => {
   return (
     <main className="container">
       <h1>Студенты</h1>
-      <EntityTable data={students} columns={columns} />
+      <TableSearch data={students} columns={columns} />
     </main>
   );
 };
