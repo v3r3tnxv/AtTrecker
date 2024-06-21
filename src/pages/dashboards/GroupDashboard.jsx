@@ -1,13 +1,15 @@
+// client/src/components/GroupDashboards.jsx
+
 import React from "react";
 import { Link } from "react-router-dom";
 import Subjects from "../data/SubjectsData"; // Импорт данных о дисциплинах
 
-function SubjectsPage() {
+function GroupDashboards() {
   return (
-    <main className='container'>
-      <h1>Дисциплины</h1>
+    <main className="container">
+      <h1>Панель группы</h1>
     </main>
   );
 }
 
-export default SubjectsPage;
+export default GroupDashboards;

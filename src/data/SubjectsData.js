@@ -1,29 +1,51 @@
-const rols = [
-  { id: 1, name: "Администратор", login: "adm", password: "1" },
+export const roles = [
+  { id: 1, name: "Администратор", login: "admin", password: "1" },
   { id: 2, name: "Преподаватель", login: "teacher", password: "1" },
   { id: 3, name: "Группа", login: "group", password: "1" },
   { id: 4, name: "Диспетчер", login: "dispatcher", password: "1" },
 ];
 
-const groups = [
+export const groups = [
   { id: 1, name: "20-ПИ", login: "group20", password: "1" },
   { id: 2, name: "21-ПИЦ", login: "group21", password: "1" },
   { id: 3, name: "23-ПИ", login: "group23", password: "1" },
+  21-ПИЭ
+  22-ПИЭ
+22-ПИЦ
+
+
 ];
 
-const subgroups = [
+export const subgroups = [
   { id: 1, name: "23-ПИ-1", login: "subgroup1", password: "1" },
   { id: 2, name: "23-ПИ-3", login: "subgroup3", password: "1" },
+  21-ПИЭ-1
+21-ПИЭ-2
+22-ПИЭ-1
+22-ПИЭ-2
 ];
 
-const teachers = [
+export const teachers = [
   { id: 1, name: "Копырин А.С.", login: "kas", password: "1" },
   { id: 2, name: "Коваленко В.В.", login: "kvv", password: "1" },
   { id: 3, name: "Драч В.Е.", login: "dve", password: "1" },
   { id: 4, name: "Салова Т.Л.", login: "stl", password: "1" },
+  Улитина Е.И.
+Кортава Ж.Г.
+Легкая Е.Ф.
+Федякина Л.К.
+Волков А.Н.
+Торкунов О.В.
+Попов Д.И.
+Таран К.В.
+Федорова Н.Н.
+Шуванова В.П.
+Торкунова Ю.В.
+Млынарь Е.Ш.
+Прус Л.В.
 ];
 
-const Subjects = [
+export const Subjects = [
   { id: 1, name: "Алгоритмизация и программирование" },
   { id: 2, name: "Базы данных" },
   { id: 3, name: "Введение в машинное обучение" },
@@ -50,5 +72,3 @@ const Subjects = [
   { id: 27, name: "Современный инструментарий бизнес-аналитики" },
   { id: 28, name: "Элективные дисциплины по физической культуре и спорту" },
 ];
-
-export default Subjects;

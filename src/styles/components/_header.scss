@@ -28,3 +28,105 @@
     }
   }
 }
+
+.global-header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.global-header__brand {
+
+}
+
+.global-header__brand-img {
+
+}
+
+.global-header__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.global-header__nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.global-header__nav-item {
+  margin-right: 20px;
+
+}
+
+.global-header__nav-item a {
+  width: 100%;
+  color: #fff;
+  text-decoration: none;
+}
+
+.global-header__nav-item a:hover {
+  color: #ccc;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #333;
+  padding: 10px;
+  border: 1px solid #333;
+  display: none;
+  width: max-content;
+  flex-direction: row;
+}
+
+.dropdown-menu li {
+  margin-bottom: 10px;
+}
+
+.dropdown-menu a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+  color: #ccc;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.global-header__account-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.global-header__account-item {
+  margin-right: 20px;
+}
+
+.global-header__account-item a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.global-header__account-item a:hover {
+  color: #ccc;
+}
