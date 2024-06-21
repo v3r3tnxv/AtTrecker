@@ -25,7 +25,8 @@ const UsersManagement = () => {
   const columns = [
     { header: "Идентификатор", field: "user_id" },
     { header: "Логин", field: "user_login" },
-    // Добавьте другие поля, если необходимо
+    { header: "Пароль", field: "user_password" },
+    { header: "Роль", field: "role_name" }
   ];
 
   return (
@@ -37,4 +38,3 @@ const UsersManagement = () => {
 };
 
 export default UsersManagement;
-
