@@ -12,6 +12,7 @@ const StatusesManagement = () => {
   const [newStatusName, setNewStatusName] = useState("");
   const [newStatusShortName, setNewStatusShortName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedStatuses, setSelectedStatuses] = useState([]);
 
   useEffect(() => {
     fetchStatuses();
@@ -28,13 +29,26 @@ const StatusesManagement = () => {
 
   const handleAddStatus = async () => {
     try {
-      const response = await api.post("/statuses", { status_name: newStatusName, status_short_name: newStatusShortName });
+      const response = await api.post("/statuses", {
+        status_name: newStatusName,
+        status_short_name: newStatusShortName,
+      });
       setStatuses([...statuses, response.data]);
       setNewStatusName("");
       setNewStatusShortName("");
       setIsModalOpen(false);
     } catch (error) {
       console.error("Error adding status", error);
+    }
+  };
+
+  const handleDeleteStatuses = async () => {
+    try {
+      await api.delete("/statuses", { data: { ids: selectedStatuses } });
+      setStatuses(statuses.filter((status) => !selectedStatuses.includes(status.status_id)));
+      setSelectedStatuses([]);
+    } catch (error) {
+      console.error("Error deleting statuses", error);
     }
   };
 
@@ -50,7 +64,19 @@ const StatusesManagement = () => {
       <Button className="button" onClick={() => setIsModalOpen(true)}>
         Добавить статус
       </Button>
-
+      <Button
+        className="button"
+        onClick={handleDeleteStatuses}
+        disabled={selectedStatuses.length === 0}
+      >
+        Удалить выбранные
+      </Button>
+      <TableSearch
+        data={statuses}
+        columns={columns}
+        selectedItems={selectedStatuses}
+        setSelectedItems={setSelectedStatuses}
+      />
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <h2>Добавить статус</h2>
         <Input
@@ -65,10 +91,10 @@ const StatusesManagement = () => {
           onChange={(e) => setNewStatusShortName(e.target.value)}
           placeholder="Введите сокращенное название статуса"
         />
-        <Button className="button" onClick={handleAddStatus}>Добавить</Button>
+        <Button className="button" onClick={handleAddStatus}>
+          Добавить
+        </Button>
       </Modal>
-
-      <TableSearch data={statuses} columns={columns} />
     </main>
   );
 };

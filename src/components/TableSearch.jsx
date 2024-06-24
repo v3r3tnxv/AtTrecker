@@ -2,11 +2,19 @@
 
 import React, { useState } from "react";
 
-const TableSearch = ({ data, columns }) => {
+const TableSearch = ({ data, columns, selectedItems = [], setSelectedItems }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
+  };
+
+  const handleSelectChange = (e, id) => {
+    if (e.target.checked) {
+      setSelectedItems([...selectedItems, id]);
+    } else {
+      setSelectedItems(selectedItems.filter((item) => item !== id));
+    }
   };
 
   const filteredData = data.filter((row) => {
@@ -22,6 +30,7 @@ const TableSearch = ({ data, columns }) => {
       <table>
         <thead>
           <tr>
+            <th></th>
             {columns.map((column, index) => (
               <th key={index}>{column.header}</th>
             ))}
@@ -30,6 +39,13 @@ const TableSearch = ({ data, columns }) => {
         <tbody>
           {filteredData.map((row, index) => (
             <tr key={index}>
+              <td>
+                <input
+                  type="checkbox"
+                  checked={selectedItems && selectedItems.includes(row[columns[0].field])}
+                  onChange={(e) => handleSelectChange(e, row[columns[0].field])}
+                />
+              </td>
               {columns.map((column, index) => (
                 <td key={index}>{row[column.field]}</td>
               ))}

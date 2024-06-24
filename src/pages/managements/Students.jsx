@@ -10,6 +10,7 @@ import Button from "../../components/Button";
 const StudentsManagement = () => {
   const [students, setStudents] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedStudents, setSelectedStudents] = useState([]);
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -34,6 +35,16 @@ const StudentsManagement = () => {
     }
   };
 
+  const handleDeleteStudents = async () => {
+    try {
+      await api.delete("/students", { data: { ids: selectedStudents } });
+      setStudents(students.filter((student) => !selectedStudents.includes(student.student_id)));
+      setSelectedStudents([]);
+    } catch (error) {
+      console.error("Error deleting students", error);
+    }
+  };
+
   const columns = [
     { header: "Идентификатор", field: "student_id" },
     { header: "Фамилия", field: "student_surname" },
@@ -50,10 +61,22 @@ const StudentsManagement = () => {
   return (
     <main className="container">
       <h1>Студенты</h1>
-      <Button className="button" onClick={() => setIsModalOpen(true)}>+ Добавить</Button>
-      
-      <TableSearch data={students} columns={columns} />
-
+      <Button className="button" onClick={() => setIsModalOpen(true)}>
+        + Добавить
+      </Button>
+      <Button
+        className="button"
+        onClick={handleDeleteStudents}
+        disabled={selectedStudents.length === 0}
+      >
+        Удалить выбранных
+      </Button>
+      <TableSearch
+        data={students}
+        columns={columns}
+        selectedItems={selectedStudents}
+        setSelectedItems={setSelectedStudents}
+      />
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <AddForm fields={fields} onSubmit={handleAddStudent} />
       </Modal>

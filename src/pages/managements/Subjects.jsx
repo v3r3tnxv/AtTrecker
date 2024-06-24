@@ -10,6 +10,7 @@ import Button from "../../components/Button";
 const SubjectsManagement = () => {
   const [subjects, setSubjects] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedSubjects, setSelectedSubjects] = useState([]);
 
   useEffect(() => {
     const fetchSubjects = async () => {
@@ -34,24 +35,42 @@ const SubjectsManagement = () => {
     }
   };
 
+  const handleDeleteSubjects = async () => {
+    try {
+      await api.delete("/subjects", { data: { ids: selectedSubjects } });
+      setSubjects(subjects.filter((subject) => !selectedSubjects.includes(subject.subject_id)));
+      setSelectedSubjects([]);
+    } catch (error) {
+      console.error("Error deleting subjects", error);
+    }
+  };
+
   const columns = [
     { header: "Идентификатор", field: "subject_id" },
     { header: "Название предмета", field: "subject_name" },
-    // Добавьте другие поля, если необходимо
   ];
 
-  const fields = [
-    { name: "subject_name", label: "Название предмета" },
-    // Добавьте другие поля, если необходимо
-  ];
+  const fields = [{ name: "subject_name", label: "Название предмета" }];
 
   return (
     <main className="container">
-      <h1>Предметы</h1>
+      <h1>Дисциплины</h1>
       <Button className="button" onClick={() => setIsModalOpen(true)}>
-        + Добавить предмет
+        + Добавить
       </Button>
-      <TableSearch data={subjects} columns={columns} />
+      <Button
+        className="button"
+        onClick={handleDeleteSubjects}
+        disabled={selectedSubjects.length === 0}
+      >
+        Удалить выбранные
+      </Button>
+      <TableSearch
+        data={subjects}
+        columns={columns}
+        selectedItems={selectedSubjects}
+        setSelectedItems={setSelectedSubjects}
+      />
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <AddForm fields={fields} onSubmit={handleAddSubject} />
       </Modal>
