@@ -3,8 +3,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 
-import Header from "./components/loyauts/Header";
-import Footer from "./components/loyauts/Footer";
+import Header from "./components/layouts/Header";
+import Footer from "./components/layouts/Footer";
 
 import NotFoundPage from "./pages/NotFound";
 import HomePage from "./pages/Home";

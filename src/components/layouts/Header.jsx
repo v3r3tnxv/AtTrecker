@@ -1,4 +1,4 @@
-// client/src/components/loyauts/Header.jsx
+// client/src/components/layouts/Header.jsx
 
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
@@ -56,10 +56,6 @@ function Header() {
 
           <li className="global-header__nav-item">
             <Link to="/attendance-report">Отчет по посещаемости</Link>
-          </li>
-
-          <li className="global-header__nav-item">
-            <Link to="/registration">Регистрация</Link>
           </li>
         </ul>
 

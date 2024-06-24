@@ -1,12 +1,18 @@
 import React from "react";
 
-function Input({ type, id, value, onChange, label }) {
+const Select = ({ id, value, onChange, label, options }) => {
   return (
     <div>
       <label htmlFor={id}>{label}</label>
-      <input type={type} id={id} value={value} onChange={onChange} required />
+      <select id={id} value={value} onChange={onChange}>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
     </div>
   );
-}
+};
 
-export default Input;
+export default Select;
